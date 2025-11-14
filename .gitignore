@@ -1,0 +1,31 @@
+# Environment files
+.env
+*.env.local
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules
+node_modules/
+frontend/node_modules/
+frontend/build/
+
+# Go
+backend/server
+backend_new/server
+*.exe
+
+# Docker
+docker-compose.override.yml

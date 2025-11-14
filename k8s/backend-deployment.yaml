@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: <username>/dynamic-monitoring-backend:1.0.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: GIN_MODE
+              value: "release"
+            - name: SMTP_SETTINGS_PATH
+              value: "/data/smtp_settings.json"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}

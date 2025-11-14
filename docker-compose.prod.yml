@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    image: ${BACKEND_IMAGE}
+    container_name: dynamic-monitoring-backend
+    environment:
+      - GIN_MODE=release
+      - SMTP_SETTINGS_PATH=/data/smtp_settings.json
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      - backend_data:/data
+
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    container_name: dynamic-monitoring-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+
+volumes:
+  backend_data: {}
